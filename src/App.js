@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import { Button } from './Button';
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
 
       <button name="logIn">Log In</button>
       <button name="signUp">Sign Up</button>
+
+      <Button/>
 
     </div>
   );
