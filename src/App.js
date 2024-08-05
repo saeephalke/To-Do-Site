@@ -1,26 +1,32 @@
 import logo from './logo.svg';
 import './App.css';
 import { Button } from './Button';
+import { useEffect } from 'react';
 
 function App() {
+  const[data, setData] = useState([])
+  useEffect(()=> {
+    fetch('http://localhost:8081/users')
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
+  }, [])
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        To Do App
-      </header>
-      <p2> Do not put any personal information into the App</p2>
-
-      <div>
-
-      Username: <input name="username"/> 
-      Password: <input name="password"/>
-      </div>
-
-      <button name="logIn">Log In</button>
-      <button name="signUp">Sign Up</button>
-
-      <Button/>
-
+      <table>
+        <thead>
+          <th>User</th>
+        </thead>
+        <tbody>
+          {data.map((d, i) => (
+            <tr key = {i}>
+              <td>{d.username}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

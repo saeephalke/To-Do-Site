@@ -1,0 +1,1 @@
+INSERT INTO tasks (task, due_date, user) VALUES ("clean",  DATE '2024-08-24', "user");
