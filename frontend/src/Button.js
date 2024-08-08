@@ -1,10 +1,9 @@
-export function Button(){
+export function Button(props){
 
-    let number = 7;
     return(
 
         <button>
-        <p> {number} </p>
+        <p> {props.text} </p>
         </button>
     )
 }
