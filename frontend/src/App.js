@@ -6,6 +6,7 @@ import { Textbox } from './Textbox';
 import { Login } from './Login';
 import { TaskDisplay } from './TaskDisplay';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 
@@ -20,13 +21,14 @@ function App() {
 
 
   return (
-  
+    <>
       <BrowserRouter> 
       <Routes>
       <Route path='' element={<Login/>} ></Route>
       <Route path='tasks' element={<TaskDisplay/>} ></Route>
     </Routes>
     </BrowserRouter>
+    </>
   
   );
 }

@@ -3,6 +3,7 @@ import { Tasks } from "./Tasks"
 import { Textbox } from "./Textbox"
 import { Button } from "./Button"
 import ReactDropdown from "react-dropdown"
+import { Link } from "react-router-dom"
 
 export function TaskDisplay(props){
 
@@ -41,7 +42,7 @@ export function TaskDisplay(props){
 
             <Tasks task="Clean" dueDate = "08-07-2024"></Tasks>
 
-            <Button text="Log Out"></Button>
+            <Link to='/'><Button text="Log Out"></Button></Link>
         </>
     )
 

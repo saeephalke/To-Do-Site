@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Textbox } from "./Textbox";
 import { Button } from "./Button";
+import { Link } from "react-router-dom";
 
 export function Login(){
 
@@ -13,7 +14,7 @@ export function Login(){
     <Textbox text={"Username"}></Textbox>
     <Textbox text={"Password"}></Textbox>
 
-    <Button text={"Log In"}></Button>
+    <Link to='/tasks'> <Button text={"Log In"}></Button></Link>
     <Button text={"Sign Up"}></Button>
     </>
     )
