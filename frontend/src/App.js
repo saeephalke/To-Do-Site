@@ -5,6 +5,9 @@ import { useEffect, useState } from 'react';
 import { Textbox } from './Textbox';
 import { Login } from './Login';
 import { TaskDisplay } from './TaskDisplay';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+
+
 
 function App() {
   const[data, setData] = useState([])
@@ -17,25 +20,14 @@ function App() {
 
 
   return (
-    <div className="App">
-      <Login></Login>
-
-      
-
-
-      <table>
-        <thead>
-          <th>ID</th>
-        </thead>
-        <tbody>
-          {data.map((d) => (
-            <tr>
-              <td>{d.username}</td>
-              </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+  
+      <BrowserRouter> 
+      <Routes>
+      <Route path='' element={<Login/>} ></Route>
+      <Route path='tasks' element={<TaskDisplay/>} ></Route>
+    </Routes>
+    </BrowserRouter>
+  
   );
 }
 

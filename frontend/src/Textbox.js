@@ -8,7 +8,6 @@ export function Textbox(props){
         <>
         <p>{props.text}</p>
         <input onChange={(e) => setText(e.target.value)}></input>
-        <p>{props.text} is {text}</p>
         </>     
     )
 }
