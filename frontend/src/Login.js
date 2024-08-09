@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Textbox } from "../src/Textbox";
-import { Button } from "../src/Button";
+import { Textbox } from "./Textbox";
+import { Button } from "./Button";
 
 export function Login(){
 
