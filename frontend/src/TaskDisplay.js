@@ -36,7 +36,7 @@ export function TaskDisplay(props){
             )}
             </select>
 
-            <Textbox text="New Task"></Textbox>
+        
             <Button text="Add Task"></Button>
             
 

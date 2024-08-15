@@ -7,7 +7,7 @@ export function Textbox(props){
     return(
         <>
         <p>{props.text}</p>
-        <input onChange={(e) => setText(e.target.value)}></input>
+        <input></input>
         </>     
     )
 }
