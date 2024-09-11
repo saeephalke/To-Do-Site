@@ -3,7 +3,7 @@ import { Tasks } from "./Tasks"
 import { Textbox } from "./Textbox"
 import { Button } from "./Button"
 import { Link } from "react-router-dom"
-import React, { useContext, useState } from "react"
+import React, { useContext, useState, useEffect} from "react"
 import { UserContext } from "./App"
 import axios from "axios"
 
@@ -19,6 +19,11 @@ export function TaskDisplay(props){
     const [duedate, setDuedate] = useState('')
     const [newTask, setNewtask] = useState('')
 
+    const[tasks, setTasks] = useState([])
+        axios.get("http://localhost:8081/tasks")
+        .then((response) => response.data)
+        .then(response => setTasks(response))
+ 
     function addTask(){
 
         
@@ -30,8 +35,7 @@ export function TaskDisplay(props){
 
         axios.post("http://localhost:8081/addTasks", data)
     }
-    
-    
+
     return(
 
         <>
@@ -43,9 +47,11 @@ export function TaskDisplay(props){
 
         
             <button onClick={addTask}>Add Task</button>
-            
 
-            <Tasks task="Clean" dueDate = "08-07-2024"></Tasks>
+            {tasks.map((d, i) => (
+                <><p>{d.due_date}</p>
+                <p>{d.task}</p></>
+            ))}
 
             <Link to='/' onClick={(e) => setUsername("")}><Button text="Log Out"></Button></Link>
         </>
