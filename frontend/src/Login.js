@@ -6,6 +6,9 @@ import { UserContext } from "./App";
 
 
 export function Login(){
+    function change(){
+        console.log("change")
+    }
 
     const [username, setUsername] = useContext(UserContext)
 
@@ -17,7 +20,7 @@ export function Login(){
 
     <p>Login</p><input onChange={(e) => setUsername(e.target.value)}></input>
     <Link to='/tasks'> <Button text={"Log In"}></Button></Link>
-    <Button text={"Sign Up"}></Button>
+    <Button text={"Sign Up"} onClick={change}></Button>
     </>
     )
       

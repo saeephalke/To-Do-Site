@@ -3,8 +3,10 @@ import { Tasks } from "./Tasks"
 import { Textbox } from "./Textbox"
 import { Button } from "./Button"
 import { Link } from "react-router-dom"
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import { UserContext } from "./App"
+import axios from "axios"
+
 
 export function TaskDisplay(props){
 
@@ -13,34 +15,34 @@ export function TaskDisplay(props){
     const years = [2024, 2025, 2026, 2027, 2028]
 
     const [username, setUsername] = useContext(UserContext)
+
+    const [duedate, setDuedate] = useState('')
+    const [newTask, setNewtask] = useState('')
+
+    function addTask(){
+
+        
+        const data = {
+            task : newTask,
+            due_date : duedate,
+            user : username
+        }
+
+        axios.post("http://localhost:8081/addTasks", data)
+    }
+    
     
     return(
 
         <>
             <h1>{props.username}'s Tasks</h1>
 
-            <Textbox text="Task Name: "></Textbox>
-            
-            <select>
-                {months.map((month) =>
-                <option value={month}>{month}</option>
-            )}
-            </select>
+            <p>Task Name: </p><input onChange={(e) => setNewtask(e.target.value)}></input>
 
-            <select>
-                {days.map((day) =>
-                <option value={day}>{day}</option>
-            )}
-            </select>
-
-            <select>
-                {years.map((year) =>
-                <option value={year}>{year}</option>
-            )}
-            </select>
+            <p>Date in MM-DD-YYYY format</p><input onChange={(e) => setDuedate(e.target.value)}></input>
 
         
-            <Button text="Add Task"></Button>
+            <button onClick={addTask}>Add Task</button>
             
 
             <Tasks task="Clean" dueDate = "08-07-2024"></Tasks>
