@@ -20,10 +20,15 @@ export function TaskDisplay(props){
     const [newTask, setNewtask] = useState('')
 
     const[tasks, setTasks] = useState([])
-        axios.get("http://localhost:8081/tasks")
+    getList()
+
+    function getList(){
+        axios.get("http://localhost:8081/userTasks", username)
         .then((response) => response.data)
         .then(response => setTasks(response))
- 
+}
+    
+
     function addTask(){
 
         
@@ -34,6 +39,7 @@ export function TaskDisplay(props){
         }
 
         axios.post("http://localhost:8081/addTasks", data)
+        getList()
     }
 
     return(
@@ -48,10 +54,11 @@ export function TaskDisplay(props){
         
             <button onClick={addTask}>Add Task</button>
 
-            {tasks.map((d, i) => (
-                <><p>{d.due_date}</p>
-                <p>{d.task}</p></>
-            ))}
+            {tasks.map((d, i) =>
+                
+                    <Tasks taskName={d.task} dueDate={d.due_date}></Tasks>
+                
+            )}
 
             <Link to='/' onClick={(e) => setUsername("")}><Button text="Log Out"></Button></Link>
         </>
