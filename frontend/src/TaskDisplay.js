@@ -27,7 +27,7 @@ export function TaskDisplay(props){
     
    useEffect(()=>{
     const fetchTasks = async () => {
-        const res = await axios.get("http://localhost:8081/tasks")
+        const res = await axios.get("http://localhost:8081/userTasks?q=" + username)
         setTasks(res.data)
     }
     fetchTasks()
