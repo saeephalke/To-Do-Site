@@ -18,12 +18,10 @@ export function TaskDisplay(props){
 
     const [duedate, setDuedate] = useState('')
     const [newTask, setNewtask] = useState('')
+    const [, forceRender] = useState(undefined)
 
     const[tasks, setTasks] = useState([])
-
-    const data = {
-        user: username,
-    }
+    console.log("app has been rendered")
     
    useEffect(()=>{
     const fetchTasks = async () => {
@@ -43,6 +41,13 @@ export function TaskDisplay(props){
         }
 
         axios.post("http://localhost:8081/addTasks", data)
+        const fetchTasks = async () => {
+            const res = await axios.get("http://localhost:8081/userTasks?q=" + username)
+            setTasks(res.data)
+            console.log(tasks)
+        }
+        fetchTasks()
+        forceRender()
     }
 
     return(
