@@ -12,5 +12,7 @@ export function Tasks(props){
             </div>
         </>
     )
+    function removeTask(){
 
+    }
 }

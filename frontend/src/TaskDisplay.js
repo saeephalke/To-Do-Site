@@ -10,13 +10,15 @@ import axios from "axios"
 
 export function TaskDisplay(props){
 
-    const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-    const days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
-    const years = [2024, 2025, 2026, 2027, 2028]
+    const months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
+    const days = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"]
+    const years = ["2025", "2026", "2027", "2028", "2029"]
 
     const [username, setUsername] = useContext(UserContext)
 
-    const [duedate, setDuedate] = useState('')
+    const [day, setDay] = useState("01")
+    const [month, setMonth] = useState("01")
+    const [year, setYear] = useState("2025")
     const [newTask, setNewtask] = useState('')
     const [, forceRender] = useState(undefined)
 
@@ -36,7 +38,7 @@ export function TaskDisplay(props){
         
         const data = {
             task : newTask,
-            due_date : duedate,
+            due_date : year + "-" + month + "-" + day,
             user : username
         }
 
@@ -51,17 +53,39 @@ export function TaskDisplay(props){
     }
 
     return(
-
+        
         <>
+            
             <h1>{props.username}'s Tasks</h1>
 
-            <p>Task Name: </p><input onChange={(e) => setNewtask(e.target.value)}></input>
+            <div id="addTasks">
+            <p>Task Name</p><input onChange={(e) => setNewtask(e.target.value)}></input>
+            <p>Select a day</p>
+            <select onChange={(e) => setDay(e.target.value)}>
+                {days.map((d) =>
+                    <option>{d}</option>
 
-            <p>Date in MM-DD-YYYY format</p><input onChange={(e) => setDuedate(e.target.value)}></input>
+                )}
+            </select>
+            <p>Select a month</p>
+            <select onChange={(e) => setMonth(e.target.value)}>
+                {months.map((d) =>
+                    <option>{d}</option>
+
+                )}
+            </select>
+
+            <p>Select a year</p>
+            <select onChange={(e) => setYear(e.target.value)}>
+                {years.map((d) =>
+                    <option>{d}</option>
+
+                )}
+            </select>
 
         
             <button onClick={addTask}>Add Task</button>
-
+            </div>
             {tasks.map((d, i) =>
                     
                     <Tasks taskName={d.task} dueDate={d.due_date}></Tasks>
