@@ -1,6 +1,5 @@
 
 import { Tasks } from "./Tasks"
-import { Textbox } from "./Textbox"
 import { Button } from "./Button"
 import { Link } from "react-router-dom"
 import React, { useContext, useState, useEffect} from "react"
@@ -20,36 +19,34 @@ export function TaskDisplay(props){
     const [month, setMonth] = useState("01")
     const [year, setYear] = useState("2025")
     const [newTask, setNewtask] = useState('')
-    const [, forceRender] = useState(undefined)
 
     const[tasks, setTasks] = useState([])
-    console.log("app has been rendered")
     
    useEffect(()=>{
     const fetchTasks = async () => {
         const res = await axios.get("http://localhost:8081/userTasks?q=" + username)
         setTasks(res.data)
     }
-    fetchTasks()
-    }, [])
+    if(username) fetchTasks();
+    }, [username])
 
-    function addTask(){
-
-        
+    async function addTask() {
+        console.log("hi")
         const data = {
-            task : newTask,
-            due_date : year + "-" + month + "-" + day,
-            user : username
-        }
+            task: newTask,
+            due_date: `${year}-${month}-${day}`,
+            user: username
+        };
+    
+        
+        const postRes = await axios.post("http://localhost:8081/addTasks", data);
+        console.log("hello")
+        console.log("Post response:", postRes);
 
-        axios.post("http://localhost:8081/addTasks", data)
-        const fetchTasks = async () => {
-            const res = await axios.get("http://localhost:8081/userTasks?q=" + username)
-            setTasks(res.data)
-            console.log(tasks)
-        }
-        fetchTasks()
-        forceRender()
+        const getRes = await axios.get("http://localhost:8081/userTasks?q=" + username);
+        console.log("Get response:", getRes);
+        setTasks(getRes.data);
+      
     }
 
     return(
@@ -62,23 +59,23 @@ export function TaskDisplay(props){
             <p>Task Name</p><input onChange={(e) => setNewtask(e.target.value)}></input>
             <p>Select a day</p>
             <select onChange={(e) => setDay(e.target.value)}>
-                {days.map((d) =>
-                    <option>{d}</option>
+                {days.map((d, i) =>
+                    <option key={i}>{d}</option>
 
                 )}
             </select>
             <p>Select a month</p>
             <select onChange={(e) => setMonth(e.target.value)}>
-                {months.map((d) =>
-                    <option>{d}</option>
+                {months.map((d, i) =>
+                    <option key={i}>{d}</option>
 
                 )}
             </select>
 
             <p>Select a year</p>
             <select onChange={(e) => setYear(e.target.value)}>
-                {years.map((d) =>
-                    <option>{d}</option>
+                {years.map((d, i) =>
+                    <option key={i}>{d}</option>
 
                 )}
             </select>
@@ -88,7 +85,7 @@ export function TaskDisplay(props){
             </div>
             {tasks.map((d, i) =>
                     
-                    <Tasks taskName={d.task} dueDate={d.due_date}></Tasks>
+                    <Tasks key={i} taskName={d.task} dueDate={d.due_date}></Tasks>
                     
                 
             )}

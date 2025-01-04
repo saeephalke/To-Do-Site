@@ -1,1 +1,1 @@
-DELETE from tasks;
+DELETE FROM tasks WHERE task="tilly" AND due_date=DATE("2025-08-02") AND user="user";
